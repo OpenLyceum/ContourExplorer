@@ -1,21 +1,27 @@
 {
-  "title": "SceneryStack Template",
+  "title": "Contour Explorer",
   "screens": {
-    "sim": "Sim"
+    "explore": "Explore"
   },
   "a11y": {
-    "screenSummary": {
-      "playArea": "The play area shows the main simulation content.",
-      "controlArea": "The control area has a Reset All button that returns the simulation to its starting state.",
-      "interactionHint": "Explore the simulation by interacting with its controls."
-    },
-    "currentDetails": "The simulation is in its initial state.",
-    "controls": {
-      "exampleControl": "Example control"
+    "explore": {
+      "screenSummary": {
+        "playArea": "A contour map shows a probe and a unit direction arrow.",
+        "controlArea": "Use the sliders and buttons to change the example. Reset All restores the starting state.",
+        "interactionHint": "Predict the slope, then reveal it and rotate the arrow."
+      },
+      "controls": {
+        "surface": "Surface",
+        "bowl": "Bowl",
+        "saddle": "Saddle",
+        "x": "Probe x",
+        "y": "Probe y",
+        "angle": "Direction angle",
+        "reveal": "Reveal gradient and slope"
+      }
     }
   },
   "preferences": {
-    "title": "Simulation",
-    "exampleToggle": "Example Toggle"
+    "title": "Simulation"
   }
 }

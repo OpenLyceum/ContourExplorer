@@ -12,15 +12,11 @@
 
 import { StringProperty } from "scenerystack/axon";
 import { Tandem } from "scenerystack/tandem";
-// seed:soak-imports:start
-import SimColors from "../../src/SimColors.js";
-import { SimScreen } from "../../src/sim-screen/SimScreen.js";
-// seed:soak-imports:end
+import ContourExplorerColors from "../../src/ContourExplorerColors.js";
+import { ExploreScreen } from "../../src/explore/ExploreScreen.js";
 import { describeHeadlessSoak } from "../helpers/headlessSoak.js";
 
 describeHeadlessSoak({
-  // seed:soak-screens:start
-  screens: () => [new SimScreen({ name: new StringProperty("Sim"), tandem: Tandem.OPT_OUT })],
-  tracked: () => ({ SimColors }),
-  // seed:soak-screens:end
+  screens: () => [new ExploreScreen({ name: new StringProperty("Explore"), tandem: Tandem.OPT_OUT })],
+  tracked: () => ({ ContourExplorerColors }),
 });

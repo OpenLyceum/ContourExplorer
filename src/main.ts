@@ -21,24 +21,23 @@ import "./brand.js";
 
 import { onReadyToLaunch, PreferencesModel, Sim } from "scenerystack/sim";
 import { Tandem } from "scenerystack/tandem";
+import ContourExplorerColors from "./ContourExplorerColors.js";
+import { ExploreScreen } from "./explore/ExploreScreen.js";
 import { StringManager } from "./i18n/StringManager.js";
-import { SimPreferencesModel } from "./preferences/SimPreferencesModel.js";
-import { SimPreferencesNode } from "./preferences/SimPreferencesNode.js";
-import SimColors from "./SimColors.js";
-import { SimScreen } from "./sim-screen/SimScreen.js";
+import { ContourExplorerPreferencesModel } from "./preferences/ContourExplorerPreferencesModel.js";
+import { ContourExplorerPreferencesNode } from "./preferences/ContourExplorerPreferencesNode.js";
 
 onReadyToLaunch(() => {
   const stringManager = StringManager.getInstance();
 
-  // Simulation-specific preferences; initial values come from simQueryParameters.
-  const simPreferences = new SimPreferencesModel(Tandem.ROOT.createTandem("preferences"));
+  // Simulation-specific preferences; initial values come from contourExplorerQueryParameters.
+  const simPreferences = new ContourExplorerPreferencesModel();
 
   const screens = [
-    new SimScreen({
-      // The screen name Property updates automatically when the locale changes
-      name: stringManager.getScreenNames().simStringProperty,
-      tandem: Tandem.ROOT.createTandem("simScreen"),
-      backgroundColorProperty: SimColors.backgroundColorProperty,
+    new ExploreScreen({
+      name: stringManager.getScreenNames().exploreStringProperty,
+      tandem: Tandem.ROOT.createTandem("exploreScreen"),
+      backgroundColorProperty: ContourExplorerColors.backgroundColorProperty,
     }),
   ];
 
@@ -53,7 +52,7 @@ onReadyToLaunch(() => {
       simulationOptions: {
         customPreferences: [
           {
-            createContent: (tandem: Tandem) => new SimPreferencesNode(simPreferences, tandem),
+            createContent: (tandem: Tandem) => new ContourExplorerPreferencesNode(simPreferences, tandem),
           },
         ],
       },

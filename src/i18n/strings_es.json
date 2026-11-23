@@ -1,21 +1,27 @@
 {
-  "title": "Plantilla de Simulación",
+  "title": "Contour Explorer",
   "screens": {
-    "sim": "Simulación"
+    "explore": "Explore"
   },
   "a11y": {
-    "screenSummary": {
-      "playArea": "El área de juego muestra el contenido principal de la simulación.",
-      "controlArea": "El área de control tiene un botón Restablecer todo que devuelve la simulación a su estado inicial.",
-      "interactionHint": "Explora la simulación interactuando con sus controles."
-    },
-    "currentDetails": "La simulación está en su estado inicial.",
-    "controls": {
-      "exampleControl": "Control de ejemplo"
+    "explore": {
+      "screenSummary": {
+        "playArea": "Un mapa de contornos muestra una sonda y una flecha de dirección unitaria.",
+        "controlArea": "Usa los controles deslizantes y los botones para cambiar el ejemplo. Reiniciar restaura el estado inicial.",
+        "interactionHint": "Predice la pendiente, muéstrala y gira la flecha."
+      },
+      "controls": {
+        "surface": "Superficie",
+        "bowl": "Cuenco",
+        "saddle": "Silla de montar",
+        "x": "Coordenada x de la sonda",
+        "y": "Coordenada y de la sonda",
+        "angle": "Ángulo de dirección",
+        "reveal": "Mostrar gradiente y pendiente"
+      }
     }
   },
   "preferences": {
-    "title": "Simulación",
-    "exampleToggle": "Ejemplo de alternancia"
+    "title": "Simulación"
   }
 }

@@ -1,21 +1,27 @@
 {
-  "title": "Modèle de Simulation",
+  "title": "Contour Explorer",
   "screens": {
-    "sim": "Simulation"
+    "explore": "Explore"
   },
   "a11y": {
-    "screenSummary": {
-      "playArea": "La zone de jeu affiche le contenu principal de la simulation.",
-      "controlArea": "La zone de contrôle comporte un bouton Tout réinitialiser qui ramène la simulation à son état initial.",
-      "interactionHint": "Explorez la simulation en interagissant avec ses commandes."
-    },
-    "currentDetails": "La simulation est dans son état initial.",
-    "controls": {
-      "exampleControl": "Contrôle d'exemple"
+    "explore": {
+      "screenSummary": {
+        "playArea": "Une carte de niveaux montre une sonde et une flèche de direction unitaire.",
+        "controlArea": "Utilisez les curseurs et les boutons pour modifier l’exemple. Réinitialiser rétablit l’état initial.",
+        "interactionHint": "Prévoyez la pente, puis affichez-la et tournez la flèche."
+      },
+      "controls": {
+        "surface": "Surface",
+        "bowl": "Cuvette",
+        "saddle": "Selle",
+        "x": "Abscisse de la sonde",
+        "y": "Ordonnée de la sonde",
+        "angle": "Angle de direction",
+        "reveal": "Afficher le gradient et la pente"
+      }
     }
   },
   "preferences": {
-    "title": "Simulation",
-    "exampleToggle": "Exemple de bascule"
+    "title": "Simulation"
   }
 }
