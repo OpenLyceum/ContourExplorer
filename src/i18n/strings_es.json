@@ -14,6 +14,7 @@
         "surface": "Superficie",
         "bowl": "Cuenco",
         "saddle": "Silla de montar",
+        "dragTarget": "Sonda de curvas de nivel",
         "x": "Coordenada x de la sonda",
         "y": "Coordenada y de la sonda",
         "angle": "Ángulo de dirección",

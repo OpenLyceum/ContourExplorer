@@ -5,6 +5,7 @@
  * when the sim gains sim-specific preferences. The empty shell still wraps content
  * in ContourExplorerPanel so the shared panel toolkit stays reachable.
  */
+import { Bounds2 } from "scenerystack/dot";
 import { VBox } from "scenerystack/scenery";
 import type { Tandem } from "scenerystack/tandem";
 import ContourExplorerNamespace from "../ContourExplorerNamespace.js";
@@ -38,6 +39,10 @@ export class ContourExplorerPreferencesNode extends VBox {
       spacing: 12,
       children: [],
     });
+    // The empty scaffold still needs finite bounds for the Preferences focus highlight.
+    if (content.children.length === 0) {
+      content.localBounds = new Bounds2(0, 0, 1, 1);
+    }
     // Transparent / borderless so the Preferences dialog stays visually empty.
     const panel = new ContourExplorerPanel(content, {
       fill: "transparent",

@@ -1,7 +1,7 @@
 import { DerivedProperty, type NumberProperty, type TReadOnlyProperty } from "scenerystack/axon";
-import { Bounds2, Dimension2, type Range, toFixedNumber } from "scenerystack/dot";
+import { Bounds2, Dimension2, type Range, roundSymmetric, toFixedNumber, Vector2 } from "scenerystack/dot";
 import { localeProperty } from "scenerystack/joist";
-import { CanvasNode, DragListener, Node, Rectangle, Text, VBox } from "scenerystack/scenery";
+import { CanvasNode, DragListener, KeyboardDragListener, Node, Rectangle, Text, VBox } from "scenerystack/scenery";
 import { ResetAllButton } from "scenerystack/scenery-phet";
 import { ScreenSummaryContent, ScreenView, type ScreenViewOptions } from "scenerystack/sim";
 import { Checkbox, HSlider, RectangularPushButton } from "scenerystack/sun";
@@ -45,7 +45,7 @@ export function slider(label: TReadOnlyProperty<string>, value: NumberProperty, 
   const control = new HSlider(value, value.range, {
     accessibleName: label,
     keyboardStep: step,
-    constrainValue: (next) => value.range.constrainValue(toFixedNumber(Math.round(next / step) * step, 8)),
+    constrainValue: (next) => value.range.constrainValue(toFixedNumber(roundSymmetric(next / step) * step, 8)),
     pdomCreateAriaValueText: (current) => `${format(current ?? value.value)}${suffix}`,
     trackSize: new Dimension2(243, 4),
     thumbSize: new Dimension2(16, 21),
@@ -122,7 +122,7 @@ export class LabView extends ScreenView {
       right: bounds.maxX - SCREEN_VIEW_MARGIN,
       bottom: bounds.maxY - SCREEN_VIEW_MARGIN,
     });
-    const content = new Node({ children: [title, config.plot, panel, reset], pdomOrder: [panel, reset] });
+    const content = new Node({ children: [title, config.plot, panel, reset], pdomOrder: [config.plot, panel, reset] });
     this.addChild(content);
   }
 }
@@ -224,12 +224,23 @@ export class Plane {
   }
 }
 
-export function addPointDrag(plot: PlotCanvas, plane: Plane, x: NumberProperty, y: NumberProperty): void {
+export function addPointDrag(
+  plot: PlotCanvas,
+  plane: Plane,
+  x: NumberProperty,
+  y: NumberProperty,
+  accessibleName: TReadOnlyProperty<string>,
+): void {
   // Rectangles have a Scenery hit shape. The canvas itself only paints pixels.
   const hitArea = new Rectangle(0, 0, PLOT_WIDTH, PLOT_HEIGHT, {
     fill: "transparent",
     pickable: true,
     cursor: "crosshair",
+    tagName: "div",
+    ariaRole: "application",
+    focusable: true,
+    accessibleName,
+    accessibleNameBehavior: (_node, options, name) => ({ ...options, ariaLabel: name }),
   });
   const move = (drag: DragListener) => {
     const pointer = drag.pointer;
@@ -238,17 +249,39 @@ export function addPointDrag(plot: PlotCanvas, plane: Plane, x: NumberProperty, 
     }
     const point = plot.globalToLocalPoint(pointer.point);
     const [nextX, nextY] = plane.unproject([point.x, point.y]);
-    x.value = x.range.constrainValue(Math.round(nextX * 20) / 20);
-    y.value = y.range.constrainValue(Math.round(nextY * 20) / 20);
+    x.value = x.range.constrainValue(roundSymmetric(nextX * 20) / 20);
+    y.value = y.range.constrainValue(roundSymmetric(nextY * 20) / 20);
   };
   const listener = new DragListener({
     applyOffset: false,
     start: (_, drag) => move(drag),
     drag: (_, drag) => move(drag),
   });
+  const keyboardListener = new KeyboardDragListener({
+    dragDelta: 0.05,
+    shiftDragDelta: 0.01,
+    positionProperty: {
+      get value() {
+        return new Vector2(x.value, -y.value);
+      },
+      set value(position: Vector2) {
+        x.value = x.range.constrainValue(toFixedNumber(position.x, 2));
+        y.value = y.range.constrainValue(toFixedNumber(-position.y, 2));
+      },
+    },
+  });
   hitArea.addInputListener(listener);
+  hitArea.addInputListener(keyboardListener);
+  hitArea.addDisposable({
+    dispose: () => {
+      hitArea.removeInputListener(keyboardListener);
+      hitArea.removeInputListener(listener);
+      keyboardListener.dispose();
+      listener.dispose();
+    },
+  });
   plot.addChild(hitArea);
-  plot.addDisposable(listener, hitArea);
+  plot.addDisposable(hitArea);
 }
 
 export function line(
