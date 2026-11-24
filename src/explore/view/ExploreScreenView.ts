@@ -123,7 +123,7 @@ export class ExploreScreenView extends LabView {
         colors.ink,
       );
     });
-    addPointDrag(plot, plane, xProperty, yProperty);
+    addPointDrag(plot, plane, xProperty, yProperty, s.dragTargetStringProperty);
     super(
       {
         title: manager.getTitleStringProperty(),
