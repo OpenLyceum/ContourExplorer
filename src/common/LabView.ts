@@ -97,6 +97,22 @@ export function comboBox<T>(
   );
 }
 
+/**
+ * A push button with a text label.
+ *
+ * @public
+ */
+export function button(label: TReadOnlyProperty<string>, listener: () => void): RectangularPushButton {
+  return new RectangularPushButton({
+    ...FLAT_PANEL_PUSH_BUTTON_OPTIONS,
+    accessibleName: label,
+    content: new Text(label, { font: "bold 15px sans-serif", maxWidth: 270, fill: LIGHT_SURFACE_TEXT_FILL }),
+    xMargin: 10,
+    yMargin: 7,
+    listener,
+  });
+}
+
 /** @public */
 export function choice(label: TReadOnlyProperty<string>, caption: TReadOnlyProperty<string>, listener: () => void) {
   return new RectangularPushButton({
