@@ -1,3 +1,4 @@
+import { CONTOUR_LEVEL_COUNT, EXTENT, GRID } from "../../ContourExplorerConstants.js";
 import {
   type CriticalPoint,
   contourLevels,
@@ -8,9 +9,6 @@ import {
   type Surface,
   sampleGrid,
 } from "./ContourMath.js";
-import { EXTENT } from "./ContourModel.js";
-
-const GRID = 100;
 
 /** Everything about a surface that does not depend on the probe, computed once. */
 export type SurfaceData = {
@@ -38,7 +36,7 @@ export function surfaceData(surface: Surface): SurfaceData {
   const values = grid.flat().sort((a, b) => a - b);
   const quantile = (q: number) => values[Math.floor(q * (values.length - 1))] ?? 0;
   // Levels cover the bulk of the values, so a steep rim does not starve the interesting middle.
-  const levels = contourLevels(quantile(0.01), quantile(0.9), 9);
+  const levels = contourLevels(quantile(0.01), quantile(0.9), CONTOUR_LEVEL_COUNT);
   const slopes = grid
     .flatMap((row, j) =>
       row.map((_, i) => {

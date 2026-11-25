@@ -2,6 +2,15 @@ import { DragListener, Node, Rectangle } from "scenerystack/scenery";
 import type { ScreenViewOptions } from "scenerystack/sim";
 import Colors from "../../ContourExplorerColors.js";
 import {
+  SURFACE_MESH as MESH,
+  SURFACE_PITCH as PITCH,
+  SURFACE_RELIEF as RELIEF,
+  SURFACE_SLICE as SLICE,
+  SLICE_HALF,
+  SURFACE_VIEW as VIEW,
+  YAW_PER_PIXEL,
+} from "../../ContourExplorerConstants.js";
+import {
   arrow,
   comboBox,
   computed,
@@ -27,17 +36,6 @@ import { orthographic } from "../../common/Projection.js";
 import { StringManager } from "../../i18n/StringManager.js";
 
 type Point3 = readonly [number, number, number];
-const MESH = 26;
-const PITCH = 32;
-// The 3D view sits on the left of the canvas, the slice graph on the right.
-const VIEW = { originX: 190, originY: 250, scale: 52 };
-const SLICE = { left: 395, right: 575, top: 70, bottom: 330 };
-// Half-length of the slice through the probe, in model units along u.
-const SLICE_HALF = 2;
-// How tall the surface is drawn, in model units, from its lowest to highest level.
-const RELIEF = 2.2;
-// Degrees of yaw per pixel of horizontal drag on the 3D view.
-const YAW_PER_PIXEL = 0.4;
 
 export class SurfaceScreenView extends LabView {
   public constructor(model: ContourModel, options?: ScreenViewOptions) {

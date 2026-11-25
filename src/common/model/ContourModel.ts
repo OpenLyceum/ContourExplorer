@@ -3,8 +3,7 @@ import { Range } from "scenerystack/dot";
 import type { TModel } from "scenerystack/joist";
 import { type Surface, surfaces } from "./ContourMath.js";
 
-/** Half-width of the square window |x|, |y| ≤ EXTENT shown on both screens. */
-export const EXTENT = 2.35;
+export { EXTENT } from "../../ContourExplorerConstants.js";
 
 /**
  * The probe (x, y), the direction angle of u, and the chosen surface, shared in shape by both
