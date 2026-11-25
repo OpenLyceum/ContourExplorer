@@ -1,5 +1,6 @@
 import {
   BasicActionsKeyboardHelpSection,
+  ComboBoxKeyboardHelpSection,
   MoveDraggableItemsKeyboardHelpSection,
   SliderControlsKeyboardHelpSection,
   TwoColumnKeyboardHelpContent,
@@ -8,7 +9,7 @@ import {
 export class ExploreKeyboardHelpContent extends TwoColumnKeyboardHelpContent {
   public constructor() {
     super(
-      [new BasicActionsKeyboardHelpSection()],
+      [new BasicActionsKeyboardHelpSection(), new ComboBoxKeyboardHelpSection()],
       [new MoveDraggableItemsKeyboardHelpSection(), new SliderControlsKeyboardHelpSection()],
     );
   }

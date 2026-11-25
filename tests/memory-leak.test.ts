@@ -9,7 +9,7 @@
  * tests below using forceGC().
  */
 
-import { ExploreModel } from "../src/explore/model/ExploreModel.js";
+import { ContourModel } from "../src/common/model/ContourModel.js";
 import { describeDisposalLeaks } from "./helpers/memoryLeak.js";
 
-describeDisposalLeaks([{ name: "ExploreModel", create: () => new ExploreModel() }]);
+describeDisposalLeaks([{ name: "ContourModel", create: () => new ContourModel() }]);

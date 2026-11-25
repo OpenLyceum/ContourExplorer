@@ -1,13 +1,23 @@
 import { DerivedProperty, type NumberProperty, type TReadOnlyProperty } from "scenerystack/axon";
 import { Bounds2, Dimension2, type Range, roundSymmetric, toFixedNumber, Vector2 } from "scenerystack/dot";
 import { localeProperty } from "scenerystack/joist";
-import { CanvasNode, DragListener, KeyboardDragListener, Node, Rectangle, Text, VBox } from "scenerystack/scenery";
+import {
+  CanvasNode,
+  DragListener,
+  KeyboardDragListener,
+  Node,
+  Rectangle,
+  RichText,
+  Text,
+  VBox,
+} from "scenerystack/scenery";
 import { ResetAllButton } from "scenerystack/scenery-phet";
 import { ScreenSummaryContent, ScreenView, type ScreenViewOptions } from "scenerystack/sim";
-import { Checkbox, HSlider, RectangularPushButton } from "scenerystack/sun";
+import { Checkbox, ComboBox, HSlider, RectangularPushButton } from "scenerystack/sun";
 import Colors from "../ContourExplorerColors.js";
 import { SCREEN_VIEW_MARGIN } from "../ContourExplorerConstants.js";
 import {
+  CONTOUR_EXPLORER_COMBO_BOX_OPTIONS as COMBO_BOX_OPTIONS,
   FLAT_PANEL_PUSH_BUTTON_OPTIONS,
   FLAT_RESET_ALL_BUTTON_OPTIONS,
   LIGHT_SURFACE_TEXT_FILL,
@@ -62,6 +72,32 @@ export function checkbox(label: TReadOnlyProperty<string>, value: ConstructorPar
   });
 }
 
+/**
+ * A drop-down list for choosing one of several named items (surfaces, fields, regions). Labels may
+ * carry RichText markup. The open list is drawn in `listParent`, which LabView keeps on top.
+ *
+ * @public
+ */
+export function comboBox<T>(
+  property: ConstructorParameters<typeof ComboBox<T>>[0],
+  choices: readonly { value: T; label: StringSource; name?: StringSource }[],
+  listParent: Node,
+  accessibleName: TReadOnlyProperty<string>,
+): ComboBox<T> {
+  return new ComboBox(
+    property,
+    choices.map((item) => ({
+      value: item.value,
+      createNode: () =>
+        new RichText(item.label, { font: "15px sans-serif", fill: LIGHT_SURFACE_TEXT_FILL, maxWidth: 255 }),
+      accessibleName: item.name ?? item.label,
+    })),
+    listParent,
+    { ...COMBO_BOX_OPTIONS, accessibleName, xMargin: 10, yMargin: 5, cornerRadius: 4 },
+  );
+}
+
+/** @public */
 export function choice(label: TReadOnlyProperty<string>, caption: TReadOnlyProperty<string>, listener: () => void) {
   return new RectangularPushButton({
     ...FLAT_PANEL_PUSH_BUTTON_OPTIONS,
@@ -88,6 +124,8 @@ type LabViewConfig = {
   controls: Node[];
   readouts: StringSource[];
   reset: () => void;
+  /** Parent for open combo-box lists, created by the view and added here on top of everything. */
+  listParent?: Node;
 };
 
 export class LabView extends ScreenView {
@@ -111,7 +149,17 @@ export class LabView extends ScreenView {
     const column = new VBox({
       align: "left",
       spacing: 8,
-      children: [...config.controls, ...config.readouts.map((value, index) => text(value, 15, 300, index === 0))],
+      children: [
+        ...config.controls,
+        ...config.readouts.map(
+          (value, index) =>
+            new RichText(value, {
+              font: `${index === 0 ? "bold " : ""}15px sans-serif`,
+              maxWidth: 300,
+              fill: Colors.textColorProperty,
+            }),
+        ),
+      ],
     });
     const panel = new LabPanel(column, { xMargin: 15, yMargin: 13, minWidth: 325 });
     panel.left = config.plot.left + PLOT_WIDTH + 18;
@@ -122,7 +170,10 @@ export class LabView extends ScreenView {
       right: bounds.maxX - SCREEN_VIEW_MARGIN,
       bottom: bounds.maxY - SCREEN_VIEW_MARGIN,
     });
-    const content = new Node({ children: [title, config.plot, panel, reset], pdomOrder: [config.plot, panel, reset] });
+    const content = new Node({
+      children: [title, config.plot, panel, reset, ...(config.listParent ? [config.listParent] : [])],
+      pdomOrder: [config.plot, panel, reset],
+    });
     this.addChild(content);
   }
 }

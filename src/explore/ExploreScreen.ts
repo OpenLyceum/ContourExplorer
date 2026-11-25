@@ -15,18 +15,18 @@ import { Screen } from "scenerystack/sim";
 import type { Tandem } from "scenerystack/tandem";
 import ContourExplorerColors from "../ContourExplorerColors.js";
 import { createExploreIcon } from "../common/ContourExplorerScreenIcons.js";
-import { ExploreModel } from "./model/ExploreModel.js";
+import { ContourModel } from "../common/model/ContourModel.js";
 import { ExploreKeyboardHelpContent } from "./view/ExploreKeyboardHelpContent.js";
 import { ExploreScreenView } from "./view/ExploreScreenView.js";
 
 // Require tandem to be explicit — accidental omission would break PhET-iO.
 type ExploreScreenOptions = ScreenOptions & { tandem: Tandem };
 
-export class ExploreScreen extends Screen<ExploreModel, ExploreScreenView> {
+export class ExploreScreen extends Screen<ContourModel, ExploreScreenView> {
   public constructor(options: ExploreScreenOptions) {
     super(
       // Model factory — called once when the screen is first shown
-      () => new ExploreModel(),
+      () => new ContourModel(),
       // View factory — receives the model instance
       (model) =>
         new ExploreScreenView(model, {

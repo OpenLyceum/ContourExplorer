@@ -78,10 +78,17 @@ export class StringManager {
    */
   public getScreenNames(): {
     readonly exploreStringProperty: ReadOnlyProperty<string>;
+    readonly surfaceStringProperty: ReadOnlyProperty<string>;
   } {
     return {
       exploreStringProperty: stringProperties.screens.exploreStringProperty,
+      surfaceStringProperty: stringProperties.screens.surfaceStringProperty,
     };
+  }
+
+  /** Accessibility strings and labels for the Surface screen. */
+  public getSurfaceA11yStrings() {
+    return stringProperties.a11y.surface;
   }
 
   /** Accessibility strings for the Explore screen. */

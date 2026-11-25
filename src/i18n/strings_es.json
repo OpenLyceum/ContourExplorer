@@ -1,24 +1,46 @@
 {
   "title": "Contour Explorer",
   "screens": {
-    "explore": "Explore"
+    "explore": "Explore",
+    "surface": "Superficie"
   },
   "a11y": {
     "explore": {
       "screenSummary": {
-        "playArea": "Un mapa de contornos muestra una sonda y una flecha de dirección unitaria.",
-        "controlArea": "Usa los controles deslizantes y los botones para cambiar el ejemplo. Reiniciar restaura el estado inicial.",
-        "interactionHint": "Predice la pendiente, muéstrala y gira la flecha."
+        "playArea": "Un mapa de curvas de nivel sombreado con una sonda, la curva de nivel que pasa por ella y su tangente, una flecha de dirección u y, al revelarlos, el gradiente y su sombra sobre u.",
+        "controlArea": "Elige una superficie, mueve la sonda, gira u, revela el gradiente o marca los puntos críticos.",
+        "interactionHint": "Predice la pendiente según u y luego revélala. ¿Qué dirección es la más empinada y cuál es horizontal?"
       },
       "controls": {
         "surface": "Superficie",
-        "bowl": "Cuenco",
-        "saddle": "Silla de montar",
         "dragTarget": "Sonda de curvas de nivel",
         "x": "Coordenada x de la sonda",
         "y": "Coordenada y de la sonda",
         "angle": "Ángulo de dirección",
-        "reveal": "Mostrar gradiente y pendiente"
+        "reveal": "Mostrar gradiente y pendiente",
+        "critical": "Mostrar puntos críticos",
+        "noCritical": "No hay puntos críticos a la vista.",
+        "minimum": "Mínimo",
+        "maximum": "Máximo",
+        "saddle": "Punto de silla",
+        "degenerate": "Punto degenerado",
+        "minimumShort": "mín",
+        "maximumShort": "máx",
+        "saddleShort": "silla",
+        "degenerateShort": "?",
+        "levelStep": "Curvas cada"
+      }
+    },
+    "surface": {
+      "screenSummary": {
+        "playArea": "Una vista 3D de la superficie con la sonda, el corte de la superficie según u y ese corte como gráfica con su tangente.",
+        "controlArea": "Elige una superficie, mueve la sonda, gira u y gira la vista.",
+        "interactionHint": "La pendiente del corte en la sonda es la derivada direccional. Gira u para hacerla máxima."
+      },
+      "controls": {
+        "yaw": "Ángulo de vista",
+        "slice": "Corte según u",
+        "view": "Arrastra lateralmente para girar"
       }
     }
   },

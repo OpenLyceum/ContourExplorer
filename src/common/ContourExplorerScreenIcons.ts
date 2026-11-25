@@ -32,3 +32,11 @@ export function createExploreIcon(): ScreenIcon {
     "M276 145 L410 71 M374 68 L410 71 L392 101",
   );
 }
+
+export function createSurfaceIcon(): ScreenIcon {
+  return iconFrom(
+    "M90 250 C170 120 230 90 280 150 C330 210 390 180 460 90",
+    "M90 250 L280 320 L460 250 M280 150 L280 320",
+    "M200 205 L360 175",
+  );
+}

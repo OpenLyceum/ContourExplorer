@@ -26,6 +26,7 @@ import { ExploreScreen } from "./explore/ExploreScreen.js";
 import { StringManager } from "./i18n/StringManager.js";
 import { ContourExplorerPreferencesModel } from "./preferences/ContourExplorerPreferencesModel.js";
 import { ContourExplorerPreferencesNode } from "./preferences/ContourExplorerPreferencesNode.js";
+import { SurfaceScreen } from "./surface/SurfaceScreen.js";
 
 onReadyToLaunch(() => {
   const stringManager = StringManager.getInstance();
@@ -37,6 +38,11 @@ onReadyToLaunch(() => {
     new ExploreScreen({
       name: stringManager.getScreenNames().exploreStringProperty,
       tandem: Tandem.ROOT.createTandem("exploreScreen"),
+      backgroundColorProperty: ContourExplorerColors.backgroundColorProperty,
+    }),
+    new SurfaceScreen({
+      name: stringManager.getScreenNames().surfaceStringProperty,
+      tandem: Tandem.ROOT.createTandem("surfaceScreen"),
       backgroundColorProperty: ContourExplorerColors.backgroundColorProperty,
     }),
   ];

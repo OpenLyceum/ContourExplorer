@@ -1,24 +1,46 @@
 {
   "title": "Contour Explorer",
   "screens": {
-    "explore": "Explore"
+    "explore": "Explore",
+    "surface": "Surface"
   },
   "a11y": {
     "explore": {
       "screenSummary": {
-        "playArea": "A contour map shows a probe and a unit direction arrow.",
-        "controlArea": "Use the sliders and buttons to change the example. Reset All restores the starting state.",
-        "interactionHint": "Predict the slope, then reveal it and rotate the arrow."
+        "playArea": "A shaded contour map with a probe, the level curve through it and its tangent, a unit direction arrow u and, when revealed, the gradient and its shadow on u.",
+        "controlArea": "Choose a surface, move the probe, turn u, reveal the gradient, or mark the critical points.",
+        "interactionHint": "Predict the slope along u, then reveal it. Which direction is steepest, and which is level?"
       },
       "controls": {
         "surface": "Surface",
-        "bowl": "Bowl",
-        "saddle": "Saddle",
         "dragTarget": "Contour probe",
         "x": "Probe x",
         "y": "Probe y",
         "angle": "Direction angle",
-        "reveal": "Reveal gradient and slope"
+        "reveal": "Reveal gradient and slope",
+        "critical": "Show critical points",
+        "noCritical": "No critical points in view.",
+        "minimum": "Minimum",
+        "maximum": "Maximum",
+        "saddle": "Saddle point",
+        "degenerate": "Degenerate point",
+        "minimumShort": "min",
+        "maximumShort": "max",
+        "saddleShort": "saddle",
+        "degenerateShort": "?",
+        "levelStep": "Contours every"
+      }
+    },
+    "surface": {
+      "screenSummary": {
+        "playArea": "A 3D view of the surface with the probe, the slice of the surface along u, and that slice as a graph with its tangent.",
+        "controlArea": "Choose a surface, move the probe, turn u, and turn the view.",
+        "interactionHint": "The slope of the slice at the probe is the directional derivative. Turn u to make it steepest."
+      },
+      "controls": {
+        "yaw": "View angle",
+        "slice": "Slice along u",
+        "view": "Drag sideways to turn"
       }
     }
   },

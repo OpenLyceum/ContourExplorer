@@ -1,24 +1,46 @@
 {
   "title": "Contour Explorer",
   "screens": {
-    "explore": "Explore"
+    "explore": "Explore",
+    "surface": "Surface"
   },
   "a11y": {
     "explore": {
       "screenSummary": {
-        "playArea": "Une carte de niveaux montre une sonde et une flèche de direction unitaire.",
-        "controlArea": "Utilisez les curseurs et les boutons pour modifier l’exemple. Réinitialiser rétablit l’état initial.",
-        "interactionHint": "Prévoyez la pente, puis affichez-la et tournez la flèche."
+        "playArea": "Une carte de niveaux ombrée avec une sonde, la courbe de niveau qui la traverse et sa tangente, une flèche de direction u et, une fois révélés, le gradient et son ombre sur u.",
+        "controlArea": "Choisissez une surface, déplacez la sonde, tournez u, révélez le gradient ou marquez les points critiques.",
+        "interactionHint": "Prédisez la pente selon u, puis révélez-la. Quelle direction est la plus raide, et laquelle est de niveau ?"
       },
       "controls": {
         "surface": "Surface",
-        "bowl": "Cuvette",
-        "saddle": "Selle",
         "dragTarget": "Sonde des courbes de niveau",
         "x": "Abscisse de la sonde",
         "y": "Ordonnée de la sonde",
         "angle": "Angle de direction",
-        "reveal": "Afficher le gradient et la pente"
+        "reveal": "Afficher le gradient et la pente",
+        "critical": "Afficher les points critiques",
+        "noCritical": "Aucun point critique visible.",
+        "minimum": "Minimum",
+        "maximum": "Maximum",
+        "saddle": "Point col",
+        "degenerate": "Point dégénéré",
+        "minimumShort": "min",
+        "maximumShort": "max",
+        "saddleShort": "col",
+        "degenerateShort": "?",
+        "levelStep": "Courbes tous les"
+      }
+    },
+    "surface": {
+      "screenSummary": {
+        "playArea": "Une vue 3D de la surface avec la sonde, la coupe de la surface selon u, et cette coupe sous forme de graphe avec sa tangente.",
+        "controlArea": "Choisissez une surface, déplacez la sonde, tournez u et tournez la vue.",
+        "interactionHint": "La pente de la coupe à la sonde est la dérivée directionnelle. Tournez u pour la rendre maximale."
+      },
+      "controls": {
+        "yaw": "Angle de vue",
+        "slice": "Coupe selon u",
+        "view": "Glissez latéralement pour tourner"
       }
     }
   },
