@@ -1,6 +1,7 @@
 export const surfaces = ["bowl", "saddle", "monkey", "hill", "twoHills", "waves", "valley"] as const;
 export type Surface = (typeof surfaces)[number];
 export type Point = readonly [number, number];
+/** @internal Exported for unit tests; not part of the application API. */
 export type CriticalKind = "minimum" | "maximum" | "saddle" | "degenerate";
 export type CriticalPoint = { readonly point: Point; readonly kind: CriticalKind };
 
@@ -87,7 +88,10 @@ function hessian(surface: Surface, [x, y]: Point): [number, number, number] {
   return [fxx, fxy, fyy];
 }
 
-/** The second-derivative test: the sign of det H and of fxx. */
+/** The second-derivative test: the sign of det H and of fxx.
+ *
+ * @internal Exported for unit tests; not part of the application API.
+ */
 export function classify(surface: Surface, point: Point): CriticalKind {
   const [fxx, fxy, fyy] = hessian(surface, point);
   const det = fxx * fyy - fxy * fxy;
